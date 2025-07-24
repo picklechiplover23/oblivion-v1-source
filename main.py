@@ -1,5 +1,4 @@
-# Cracked by rafeed
-
+# credits to rafeed
 
 import requests
 import yaml
