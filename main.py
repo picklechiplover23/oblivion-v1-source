@@ -11,12 +11,22 @@ import os
 def resource_path(relative_path):
     base_path = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
     return os.path.join(base_path, relative_path)
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class OblivionGUI:
     """A GUI application for sending Discord webhook pings in Normal or Switch mode. Free Edition."""
-    DEFAULT_CONFIG = {'message': '@everyone', 'username': 'Oblivion V1', 'avatar_url': 'https://cdn.discordapp.com/attachments/1397910466088665178/1397910550452899940/DarkSdsadsahard.png?ex=68837127&is=68821fa7&hm=ed4e1981b3495f49cf21015720071df8853a1ef1a40c3f7e378e78f177f72814&', 'delay': 2.5, 'rate_limit_backoff': 60, 'max_retries': 3, 'message_limit': 9000, 'total_pings': 450000}
+    DEFAULT_CONFIG = {
+        'message': '@everyone',
+        'username': 'Oblivion V1',
+        'avatar_url': 'https://cdn.discordapp.com/attachments/1397910466088665178/1397910550452899940/DarkSdsadsahard.png?ex=68837127&is=68821fa7&hm=ed4e1981b3495f49cf21015720071df8853a1ef1a40c3f7e378e78f177f72814&',
+        'delay': 2.5,
+        'rate_limit_backoff': 60,
+        'max_retries': 3,
+        'message_limit': 9000,
+        'total_pings': 450000
+    }
 
     def __init__(self, root: tk.Tk, config_file: str):
         if sys.platform == 'win32':
@@ -25,9 +35,7 @@ class OblivionGUI:
                 myappid = 'oblivion.v1.free'
                 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
             except Exception as e:
-                pass  # postinserted
-        else:  # inserted
-            pass  # postinserted
+                print(f'Warning: Could not set AppUserModelID: {e}')
         self.root = root
         self.root.title('Oblivion V1 - Free Edition')
         self.config_file = resource_path(config_file)
@@ -42,7 +50,16 @@ class OblivionGUI:
         self.max_retries = self.config.get('max_retries', self.DEFAULT_CONFIG['max_retries'])
         self.message_limit = self.config.get('message_limit', self.DEFAULT_CONFIG['message_limit'])
         self.total_pings = self.config.get('total_pings', self.DEFAULT_CONFIG['total_pings'])
-        self._settings_fields = [('Message:', 'message_var', tk.StringVar, 'message'), ('Username:', 'username_var', tk.StringVar, 'username'), ('Avatar URL:', 'avatar_var', tk.StringVar, 'avatar_url'), ('Delay (seconds):', 'delay_var', tk.DoubleVar, 'delay'), ('Rate Limit Backoff (seconds):', 'backoff_var', tk.DoubleVar, 'rate_limit_backoff'), ('Max Retries:', 'retries_var', tk.IntVar, 'max_retries'), ('Message Limit per Webhook:', 'limit_var', tk.IntVar, 'message_limit'), ('Total Pings per Shard (Sequential Mode):', 'total_pings_var', tk.IntVar, 'total_pings')]
+        self._settings_fields = [
+            ('Message:', 'message_var', tk.StringVar, 'message'),
+            ('Username:', 'username_var', tk.StringVar, 'username'),
+            ('Avatar URL:', 'avatar_var', tk.StringVar, 'avatar_url'),
+            ('Delay (seconds):', 'delay_var', tk.DoubleVar, 'delay'),
+            ('Rate Limit Backoff (seconds):', 'backoff_var', tk.DoubleVar, 'rate_limit_backoff'),
+            ('Max Retries:', 'retries_var', tk.IntVar, 'max_retries'),
+            ('Message Limit per Webhook:', 'limit_var', tk.IntVar, 'message_limit'),
+            ('Total Pings per Shard (Sequential Mode):', 'total_pings_var', tk.IntVar, 'total_pings')
+        ]
         for _, varname, vartype, key in self._settings_fields:
             value = self.config.get(key, self.DEFAULT_CONFIG[key])
             setattr(self, varname, vartype(value=value))
@@ -52,24 +69,22 @@ class OblivionGUI:
         self.theme_var = tk.StringVar(value='Default')
         self.config['theme'] = self.config.get('theme', 'Default')
         self._setup_gui()
-                print(f'Warning: Could not set AppUserModelID: {e}')
 
     def _load_file_with_error_handling(self, path, loader, filetype):
         try:
             with open(path, 'r') as file:
-                pass  # postinserted
-        except FileNotFoundError:
                 data = loader(file)
                 if not data:
                     raise ValueError(f'Empty {filetype} file')
                 return data
-                logger.error(f'{filetype.capitalize()} file {path} not found')
-                messagebox.showerror('Error', f'{filetype.capitalize()} file {path} not found')
-                exit(1)
-            except Exception as e:
-                logger.error(f'Invalid {filetype} in {path}: {e}')
-                messagebox.showerror('Error', f'Invalid {filetype} in {path}: {e}')
-                exit(1)
+        except FileNotFoundError:
+            logger.error(f'{filetype.capitalize()} file {path} not found')
+            messagebox.showerror('Error', f'{filetype.capitalize()} file {path} not found')
+            exit(1)
+        except Exception as e:
+            logger.error(f'Invalid {filetype} in {path}: {e}')
+            messagebox.showerror('Error', f'Invalid {filetype} in {path}: {e}')
+            exit(1)
 
     def _load_config(self, config_file):
         return self._load_file_with_error_handling(config_file, yaml.safe_load, 'config')
@@ -82,17 +97,16 @@ class OblivionGUI:
         import json
         try:
             with open(path, 'r') as f:
-                pass  # postinserted
-        except Exception as e:
                 return json.load(f)
-                logger.warning(f'Could not load themes from {path}: {e}')
-                return {}
+        except Exception as e:
+            logger.warning(f'Could not load themes from {path}: {e}')
+            return {}
 
     def _set_window_icon(self, icon_path):
         try:
             if sys.platform == 'win32':
                 self.root.iconbitmap(icon_path)
-            else:  # inserted
+            else:
                 self.root.iconphoto(True, tk.PhotoImage(file=icon_path))
             logger.info(f'Loaded icon: {icon_path}')
         except Exception as e:
@@ -133,6 +147,7 @@ class OblivionGUI:
             ttk.Label(frame, text=label).grid(row=row, column=0, sticky=tk.W, pady=3, padx=5)
             entry = ttk.Entry(frame, textvariable=var, state='readonly' if readonly else 'normal')
             entry.grid(row=row, column=1, sticky='ew', pady=3, padx=5)
+
         ping_frame = ttk.LabelFrame(self.settings_tab, text='Ping Farm Settings', padding='10')
         ping_frame.grid(row=0, column=0, columnspan=2, sticky='ew', pady=5, padx=5)
         essentials = [0, 1, 2, 3, 7]
@@ -141,25 +156,28 @@ class OblivionGUI:
                 readonly = idx in (0, 1, 2)
                 add_row(ping_frame, label, getattr(self, varname), idx, readonly=readonly)
         ping_frame.columnconfigure(1, weight=1)
-        self.advanced_visible = tk.BooleanVar(value=False)
 
+        self.advanced_visible = tk.BooleanVar(value=False)
         def toggle_advanced():
             self.advanced_visible.set(not self.advanced_visible.get())
             if self.advanced_visible.get():
                 advanced_frame.grid()
                 adv_btn.config(text='Hide Advanced Options')
-            else:  # inserted
+            else:
                 advanced_frame.grid_remove()
                 adv_btn.config(text='Show Advanced Options')
-        self = ttk.Button(self.settings_tab, text='Show Advanced Options', command=toggle_advanced)
-        self.grid(row=1, column=0, sticky=tk.W, pady=5, padx=5)
-        adv_btn = ttk.LabelFrame(self.settings_tab, text='Advanced Options', padding='10')
-        adv_btn.grid(row=2, column=0, columnspan=2, sticky='ew', pady=5, padx=5)
-        adv_btn.grid_remove()
+
+        adv_btn = ttk.Button(self.settings_tab, text='Show Advanced Options', command=toggle_advanced)
+        adv_btn.grid(row=1, column=0, sticky=tk.W, pady=5, padx=5)
+
+        advanced_frame = ttk.LabelFrame(self.settings_tab, text='Advanced Options', padding='10')
+        advanced_frame.grid(row=2, column=0, columnspan=2, sticky='ew', pady=5, padx=5)
+        advanced_frame.grid_remove()
         for i, idx in enumerate([4, 5, 6]):
             label, varname, _, _ = self._settings_fields[idx]
-            add_row(adv_btn, label, getattr(self, varname), i)
-        adv_btn.columnconfigure(1, weight=1)
+            add_row(advanced_frame, label, getattr(self, varname), i)
+        advanced_frame.columnconfigure(1, weight=1)
+
         pref_frame = ttk.LabelFrame(self.settings_tab, text='Preferences', padding='10')
         pref_frame.grid(row=3, column=0, columnspan=2, sticky='ew', pady=5, padx=5)
         ttk.Label(pref_frame, text='Theme:').grid(row=0, column=0, sticky=tk.W, pady=3, padx=5)
@@ -167,11 +185,18 @@ class OblivionGUI:
         theme_combo.grid(row=0, column=1, sticky='ew', pady=3, padx=5)
         theme_combo.bind('<<ComboboxSelected>>', lambda e: self._on_theme_selected())
         pref_frame.columnconfigure(1, weight=1)
-        self.custom_color_vars = {'bg': tk.StringVar(value=self.config.get('custom_theme', {}).get('bg', '#181818')), 'fg': tk.StringVar(value=self.config.get('custom_theme', {}).get('fg', '#f8f8f2')), 'accent': tk.StringVar(value=self.config.get('custom_theme', {}).get('accent', '#6c3483')), 'entry_bg': tk.StringVar(value=self.config.get('custom_theme', {}).get('entry_bg', '#23272e')), 'entry_fg': tk.StringVar(value=self.config.get('custom_theme', {}).get('entry_fg', '#f8f8f2'))}
+        self.custom_color_vars = {
+            'bg': tk.StringVar(value=self.config.get('custom_theme', {}).get('bg', '#181818')),
+            'fg': tk.StringVar(value=self.config.get('custom_theme', {}).get('fg', '#f8f8f2')),
+            'accent': tk.StringVar(value=self.config.get('custom_theme', {}).get('accent', '#6c3483')),
+            'entry_bg': tk.StringVar(value=self.config.get('custom_theme', {}).get('entry_bg', '#23272e')),
+            'entry_fg': tk.StringVar(value=self.config.get('custom_theme', {}).get('entry_fg', '#f8f8f2'))
+        }
         self.custom_color_labels = {}
         self.custom_color_entries = {}
         row = 1
-        for key, label in zip(['bg', 'fg', 'accent', 'entry_bg', 'entry_fg'], ['Background', 'Foreground', 'Accent', 'Entry Background', 'Entry Foreground']):
+        for key, label in zip(['bg', 'fg', 'accent', 'entry_bg', 'entry_fg'],
+                              ['Background', 'Foreground', 'Accent', 'Entry Background', 'Entry Foreground']):
             lbl = ttk.Label(pref_frame, text=label + ':')
             ent = ttk.Entry(pref_frame, textvariable=self.custom_color_vars[key], width=10)
             self.custom_color_labels[key] = lbl
@@ -197,7 +222,7 @@ class OblivionGUI:
             if show:
                 self.custom_color_labels[key].grid()
                 self.custom_color_entries[key].grid()
-            else:  # inserted
+            else:
                 self.custom_color_labels[key].grid_remove()
                 self.custom_color_entries[key].grid_remove()
         if show:
@@ -206,14 +231,12 @@ class OblivionGUI:
     def _apply_theme(self, theme_name, save=False):
         if theme_name == 'Default':
             self._apply_default_theme()
-        else:  # inserted
-            if theme_name == 'Custom':
-                self._apply_custom_theme(save=save)
-            else:  # inserted
-                if theme_name in self.themes:
-                    self._apply_json_theme(theme_name)
-                else:  # inserted
-                    self._apply_default_theme()
+        elif theme_name == 'Custom':
+            self._apply_custom_theme(save=save)
+        elif theme_name in self.themes:
+            self._apply_json_theme(theme_name)
+        else:
+            self._apply_default_theme()
         if save:
             self.config['theme'] = theme_name
         self._refresh_theme_widgets()
@@ -233,23 +256,18 @@ class OblivionGUI:
         style.configure('TFrame', background=bg)
         style.configure('TLabel', background=bg, foreground=fg)
         style.configure('TButton', background=button_bg, foreground=button_fg, borderwidth=1, focusthickness=2, focuscolor=accent)
-        style.map('TButton', background=[('active', button_bg), ('pressed', accent), ('!active', button_bg)], foreground=[('active', button_fg), ('pressed', button_fg), ('!active', button_fg)])
-        style.configure('TCheckbutton', background=bg, foreground=fg, indicatorcolor=accent, indicatordiameter=12, bordercolor=accent, focuscolor=accent)
-        style.map('TCheckbutton', background=[('active', bg), ('selected', bg), ('!active', bg)], foreground=[('active', fg), ('selected', fg), ('!active', fg)])
+        style.map('TButton', background=[('active', button_bg), ('pressed', accent), ('!active', button_bg)],
+                  foreground=[('active', button_fg), ('pressed', button_fg), ('!active', button_fg)])
+        style.configure('TCheckbutton', background=bg, foreground=fg)
         style.configure('TNotebook', background=bg)
-        style.configure('TNotebook.Tab', background=button_bg, foreground=button_fg, lightcolor=accent, borderwidth=0)
-        style.map('TNotebook.Tab', background=[('selected', accent), ('active', button_bg), ('!selected', button_bg)], foreground=[('selected', fg), ('active', fg), ('!selected', button_fg)])
-        style.configure('TEntry', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg, bordercolor=accent, lightcolor=accent, darkcolor=bg, highlightcolor=accent, selectbackground=accent, selectforeground=button_fg)
-        style.map('TEntry', fieldbackground=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], background=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], foreground=[('readonly', entry_fg), ('!readonly', entry_fg), ('active', entry_fg)], bordercolor=[('focus', accent), ('!focus', accent)], highlightcolor=[('focus', accent), ('!focus', accent)])
-        style.configure('TCombobox', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg, selectbackground=entry_bg, selectforeground=entry_fg, bordercolor=accent, lightcolor=accent, darkcolor=bg, highlightcolor=accent)
-        style.map('TCombobox', fieldbackground=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], background=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], foreground=[('readonly', entry_fg), ('!readonly', entry_fg), ('active', entry_fg)], bordercolor=[('focus', accent), ('!focus', accent)], highlightcolor=[('focus', accent), ('!focus', accent)])
+        style.configure('TNotebook.Tab', background=button_bg, foreground=button_fg)
+        style.configure('TEntry', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg)
+        style.configure('TCombobox', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg)
         style.configure('Horizontal.TProgressbar', background=accent, troughcolor=bg)
         self.root.option_add('*TCombobox*Listbox.background', entry_bg)
         self.root.option_add('*TCombobox*Listbox.foreground', entry_fg)
         self.root.option_add('*Entry.background', entry_bg)
         self.root.option_add('*Entry.foreground', entry_fg)
-        self.root.option_add('*Entry.highlightBackground', accent)
-        self.root.option_add('*Entry.highlightColor', accent)
         self.root.option_add('*Text.background', entry_bg)
         self.root.option_add('*Text.foreground', entry_fg)
         self.root.option_add('*foreground', fg)
@@ -277,24 +295,17 @@ class OblivionGUI:
         style.configure('.', background=bg, foreground=fg)
         style.configure('TFrame', background=bg)
         style.configure('TLabel', background=bg, foreground=fg)
-        style.configure('TButton', background=button_bg, foreground=button_fg, borderwidth=1, focusthickness=2, focuscolor=accent)
-        style.map('TButton', background=[('active', button_bg), ('pressed', accent), ('!active', button_bg)], foreground=[('active', button_fg), ('pressed', button_fg), ('!active', button_fg)])
-        style.configure('TCheckbutton', background=bg, foreground=fg, indicatorcolor=accent, indicatordiameter=12, bordercolor=accent, focuscolor=accent)
-        style.map('TCheckbutton', background=[('active', bg), ('selected', bg), ('!active', bg)], foreground=[('active', fg), ('selected', fg), ('!active', fg)])
+        style.configure('TButton', background=button_bg, foreground=button_fg)
+        style.configure('TCheckbutton', background=bg, foreground=fg)
         style.configure('TNotebook', background=bg)
-        style.configure('TNotebook.Tab', background=button_bg, foreground=button_fg, lightcolor=accent, borderwidth=0)
-        style.map('TNotebook.Tab', background=[('selected', accent), ('active', button_bg), ('!selected', button_bg)], foreground=[('selected', fg), ('active', fg), ('!selected', button_fg)])
-        style.configure('TEntry', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg, bordercolor=accent, lightcolor=accent, darkcolor=bg, highlightcolor=accent, selectbackground=accent, selectforeground=button_fg)
-        style.map('TEntry', fieldbackground=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], background=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], foreground=[('readonly', entry_fg), ('!readonly', entry_fg), ('active', entry_fg)], bordercolor=[('focus', accent), ('!focus', accent)], highlightcolor=[('focus', accent), ('!focus', accent)])
-        style.configure('TCombobox', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg, selectbackground=entry_bg, selectforeground=entry_fg, bordercolor=accent, lightcolor=accent, darkcolor=bg, highlightcolor=accent)
-        style.map('TCombobox', fieldbackground=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], background=[('readonly', entry_bg), ('!readonly', entry_bg), ('active', entry_bg)], foreground=[('readonly', entry_fg), ('!readonly', entry_fg), ('active', entry_fg)], bordercolor=[('focus', accent), ('!focus', accent)], highlightcolor=[('focus', accent), ('!focus', accent)])
+        style.configure('TNotebook.Tab', background=button_bg, foreground=button_fg)
+        style.configure('TEntry', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg)
+        style.configure('TCombobox', fieldbackground=entry_bg, foreground=entry_fg, background=entry_bg)
         style.configure('Horizontal.TProgressbar', background=accent, troughcolor=bg)
         self.root.option_add('*TCombobox*Listbox.background', entry_bg)
         self.root.option_add('*TCombobox*Listbox.foreground', entry_fg)
         self.root.option_add('*Entry.background', entry_bg)
         self.root.option_add('*Entry.foreground', entry_fg)
-        self.root.option_add('*Entry.highlightBackground', accent)
-        self.root.option_add('*Entry.highlightColor', accent)
         self.root.option_add('*Text.background', entry_bg)
         self.root.option_add('*Text.foreground', entry_fg)
         self.root.option_add('*foreground', fg)
@@ -308,16 +319,16 @@ class OblivionGUI:
         ttk.Label(self.control_tab, text='Mode:').grid(row=0, column=0, sticky=tk.W, pady=5, padx=5)
         self.mode_display_map = {'Parallel': 'parallel', 'Sequential': 'sequential'}
         self.mode_reverse_map = {v: k for k, v in self.mode_display_map.items()}
-        self = ttk.Combobox(self.control_tab, textvariable=tk.StringVar(value=self.mode_reverse_map[self.mode.get()]), state='readonly', values=list(self.mode_display_map.keys()))
-        self.grid(row=0, column=1, sticky='ew', pady=5, padx=5)
+        mode_combo = ttk.Combobox(self.control_tab, textvariable=tk.StringVar(value=self.mode_reverse_map[self.mode.get()]), state='readonly', values=list(self.mode_display_map.keys()))
+        mode_combo.grid(row=0, column=1, sticky='ew', pady=5, padx=5)
 
         def on_mode_selected(event):
             selected_display = mode_combo.get()
             self.mode.set(self.mode_display_map[selected_display])
             self._update_shard_ui()
-        self.bind('<<ComboboxSelected>>', on_mode_selected)
-        self.set(self.mode_reverse_map[self.mode.get()])
-        self.mode_combo = self
+        mode_combo.bind('<<ComboboxSelected>>', on_mode_selected)
+        mode_combo.set(self.mode_reverse_map[self.mode.get()])
+        self.mode_combo = mode_combo
         self.shard_frame = ttk.LabelFrame(self.control_tab, text='Shards', padding='5')
         self.shard_frame.grid(row=1, column=0, columnspan=2, sticky='ew', pady=5, padx=5)
         self.switch_status_var = tk.StringVar(value='Sequential Mode: Idle')
@@ -346,7 +357,7 @@ class OblivionGUI:
                 self.shard_checkbuttons[shard] = cb
             self.switch_status_label.grid_remove()
             self.switch_shard_combo = None
-        else:  # inserted
+        else:
             ttk.Label(self.shard_frame, text='Starting Shard:').grid(row=0, column=0, sticky=tk.W, pady=5, padx=5)
             self.switch_shard_var = tk.StringVar()
             combo = ttk.Combobox(self.shard_frame, textvariable=self.switch_shard_var, state='readonly')
@@ -364,45 +375,40 @@ class OblivionGUI:
             self.config['theme'] = self.theme_var.get()
             if self.theme_var.get() == 'Custom':
                 self.config['custom_theme'] = {k: v.get() for k, v in self.custom_color_vars.items()}
-        except Exception as e:
             with open(self.config_file, 'w') as file:
                 yaml.safe_dump(self.config, file)
-                    messagebox.showinfo('Success', 'Configuration saved successfully')
-                    self.rate_limit_backoff = getattr(self, 'backoff_var').get()
-                logger.error(f'Failed to save config: {e}')
-                messagebox.showerror('Error', f'Failed to save config: {e}')
+            messagebox.showinfo('Success', 'Configuration saved successfully')
+            self.rate_limit_backoff = getattr(self, 'backoff_var').get()
+        except Exception as e:
+            logger.error(f'Failed to save config: {e}')
+            messagebox.showerror('Error', f'Failed to save config: {e}')
 
     def _send_webhook(self, webhook_url: str, message: str, username: str, avatar_url: str, shard_name: str) -> bool:
         payload = {'content': message, 'username': username, 'avatar_url': avatar_url}
         headers = {'Content-Type': 'application/json'}
         for attempt in range(self.max_retries):
             try:
-                import requests
                 response = requests.post(webhook_url, json=payload, headers=headers)
                 if response.status_code == 204:
                     self.message_counts[webhook_url] = self.message_counts.get(webhook_url, 0) + 1
                     logger.info(f'Sent message (Count: {self.message_counts[webhook_url]})')
                     if self.mode.get() == 'sequential' and shard_name == self.current_switch_shard:
                         self._update_switch_status()
-            except Exception as e:
-                else:  # inserted
                     return True
-                if response.status_code == 429:
-                    retry_after = response.json().get('retry_after', self.rate_limit_backoff) / 1000
+                elif response.status_code == 429:
+                    retry_after = response.json().get('retry_after', self.rate_limit_backoff * 1000) / 1000
                     logger.warning(f'Rate limited on {webhook_url}. Waiting {retry_after}s')
                     import time
                     time.sleep(retry_after)
-                else:  # inserted
+                else:
                     logger.error(f'Failed to send to {webhook_url}. Status: {response.status_code}, Response: {response.text}')
-                else:  # inserted
-                    return False
-        else:  # inserted
-            logger.error(f'Max retries reached for {webhook_url}')
-            return False
-            logger.error(f'Error sending to {webhook_url}: {e}')
-            if attempt < self.max_retries - 1:
-                import time
-                time.sleep(self.rate_limit_backoff)
+            except Exception as e:
+                logger.error(f'Error sending to {webhook_url}: {e}')
+                if attempt < self.max_retries - 1:
+                    import time
+                    time.sleep(self.rate_limit_backoff)
+        logger.error(f'Max retries reached for {webhook_url}')
+        return False
 
     def _webhook_loop(self, webhook_url: str, message: str, username: str, avatar_url: str, delay: float, shard_name: str):
         import time
@@ -440,7 +446,7 @@ class OblivionGUI:
     def _start_action(self):
         if self.mode.get() == 'parallel':
             self._start_parallel_mode()
-        else:  # inserted
+        else:
             self._start_sequential_mode()
 
     def _start_parallel_mode(self):
@@ -496,7 +502,7 @@ class OblivionGUI:
     def _stop_action(self):
         if self.mode.get() == 'parallel':
             self._stop_parallel_mode()
-        else:  # inserted
+        else:
             self._stop_sequential_mode()
 
     def _stop_parallel_mode(self):
@@ -509,7 +515,7 @@ class OblivionGUI:
         if not any(self.shard_status.values()):
             self._set_start_stop_state(True, False)
             self._set_shard_checkboxes_state(True)
-        else:  # inserted
+        else:
             return None
 
     def _stop_sequential_mode(self):
@@ -538,19 +544,15 @@ class OblivionGUI:
         try:
             self.root.destroy()
         except Exception:
-            pass  # postinserted
-        else:  # inserted
-            os._exit(0)
             pass
-        else:  # inserted
-            pass
+        os._exit(0)
 
     def _toggle_logs(self):
         if self.logs_visible:
             self.log_text.grid_remove()
             self.toggle_logs_button.config(text='Show Logs')
             self.logs_visible = False
-        else:  # inserted
+        else:
             self.log_text.grid()
             self.toggle_logs_button.config(text='Hide Logs')
             self.logs_visible = True
@@ -561,16 +563,14 @@ class OblivionGUI:
             theme = self.theme_var.get() if hasattr(self, 'theme_var') else self.config.get('theme', 'Default')
             if theme == 'Default':
                 self.log_text.config(bg='white', fg='black', insertbackground='black')
-            else:  # inserted
-                if theme == 'Custom':
-                    c = self.config.get('custom_theme', {})
-                    self.log_text.config(bg=c.get('entry_bg', '#23272e'), fg=c.get('entry_fg', '#f8f8f2'), insertbackground=c.get('entry_fg', '#f8f8f2'))
-                else:  # inserted
-                    if theme in self.themes:
-                        t = self.themes[theme]
-                        self.log_text.config(bg=t['entry_bg'], fg=t['entry_fg'], insertbackground=t['entry_fg'])
-                    else:  # inserted
-                        self.log_text.config(bg='white', fg='black', insertbackground='black')
+            elif theme == 'Custom':
+                c = self.config.get('custom_theme', {})
+                self.log_text.config(bg=c.get('entry_bg', '#23272e'), fg=c.get('entry_fg', '#f8f8f2'), insertbackground=c.get('entry_fg', '#f8f8f2'))
+            elif theme in self.themes:
+                t = self.themes[theme]
+                self.log_text.config(bg=t['entry_bg'], fg=t['entry_fg'], insertbackground=t['entry_fg'])
+            else:
+                self.log_text.config(bg='white', fg='black', insertbackground='black')
 
     def _reset_config(self):
         for _, varname, _, key in self._settings_fields:
@@ -593,7 +593,6 @@ class OblivionGUI:
         info.grid(row=1, column=0, sticky='w', padx=10, pady=5)
         dev = ttk.Label(self.info_tab, text='Developer: @Sewaeth (but cracked by rafeed)', font=('Segoe UI', 10, 'italic'))
         dev.grid(row=2, column=0, sticky='w', padx=10, pady=(0, 2))
-
         def open_discord():
             import webbrowser
             webbrowser.open_new('https://fbi.pet')
@@ -613,6 +612,7 @@ class TextHandler(logging.Handler):
         self.text_widget.insert(tk.END, msg + '\n')
         self.text_widget.see(tk.END)
         self.text_widget.configure(state='disabled')
+
 if __name__ == '__main__':
     root = tk.Tk()
     app = OblivionGUI(root, 'config.yaml')
