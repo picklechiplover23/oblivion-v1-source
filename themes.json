@@ -1,344 +1,101 @@
 {
-  "Dark": {
-    "bg": "#181818",
+  "OLED Dark": {
+    "bg": "#000000",
     "fg": "#f8f8f2",
     "accent": "#6c3483",
-    "entry_bg": "#23272e",
+    "entry_bg": "#101010",
     "entry_fg": "#f8f8f2",
-    "button_bg": "#272935",
-    "button_fg": "#ececec"
+    "button_bg": "#181818",
+    "button_fg": "#f8f8f2"
   },
-  "Light": {
-    "bg": "#f9f9f9",
-    "fg": "#232323",
-    "accent": "#6c3483",
-    "entry_bg": "#ffffff",
-    "entry_fg": "#232323",
-    "button_bg": "#f4f4f4",
-    "button_fg": "#232323"
+  "Femboy's Heaven": {
+    "bg": "#ffe6fa",
+    "fg": "#7d287d",
+    "accent": "#ff69b4",
+    "entry_bg": "#fff0fa",
+    "entry_fg": "#7d287d",
+    "button_bg": "#ffb6e6",
+    "button_fg": "#7d287d"
   },
-  "Blueberry": {
-    "bg": "#223365",
-    "fg": "#ffffff",
-    "accent": "#70a1ff",
-    "entry_bg": "#344678",
-    "entry_fg": "#dfe4ea",
-    "button_bg": "#3953a4",
-    "button_fg": "#f8fafc"
-  },
-  "Matrix": {
-    "bg": "#181c1b",
+  "Hacker X": {
+    "bg": "#0f1a0f",
     "fg": "#39ff14",
-    "accent": "#0aff9d",
-    "entry_bg": "#0b2111",
+    "accent": "#00ff41",
+    "entry_bg": "#1a2d1a",
     "entry_fg": "#39ff14",
-    "button_bg": "#222d1c",
+    "button_bg": "#1a2d1a",
     "button_fg": "#39ff14"
   },
-  "Solarized": {
-    "bg": "#002b36",
-    "fg": "#839496",
-    "accent": "#b58900",
-    "entry_bg": "#073642",
-    "entry_fg": "#eee8d5",
-    "button_bg": "#586e75",
-    "button_fg": "#fdf6e3"
+  "Pings Aura": {
+    "bg": "#1a0a0a",
+    "fg": "#ffffff",
+    "accent": "#ff0059",
+    "entry_bg": "#2d1010",
+    "entry_fg": "#ffffff",
+    "button_bg": "#2d1010",
+    "button_fg": "#ff4b4b"
   },
-  "Nord": {
+  "Mango Mango Mango": {
+    "bg": "#2d1a00",
+    "fg": "#ffe0b2",
+    "accent": "#ff8800",
+    "entry_bg": "#3e2723",
+    "entry_fg": "#ffb347",
+    "button_bg": "#ff8800",
+    "button_fg": "#ffe0b2"
+  },
+  "Snowgrave Route": {
     "bg": "#2e3440",
     "fg": "#eceff4",
     "accent": "#88c0d0",
     "entry_bg": "#3b4252",
     "entry_fg": "#eceff4",
-    "button_bg": "#434c5e",
-    "button_fg": "#eceff4"
+    "button_bg": "#4c566a",
+    "button_fg": "#88c0d0"
   },
-  "Retro": {
-    "bg": "#f4ecd8",
-    "fg": "#2d2424",
-    "accent": "#ff9800",
-    "entry_bg": "#fff8e1",
-    "entry_fg": "#2d2424",
-    "button_bg": "#ffd580",
-    "button_fg": "#7e5109"
+  "Virtual Grass": {
+    "bg": "#232b22",
+    "fg": "#d2e8cf",
+    "accent": "#4e944f",
+    "entry_bg": "#2d3a2e",
+    "entry_fg": "#d2e8cf",
+    "button_bg": "#386641",
+    "button_fg": "#d2e8cf"
   },
-  "Grape Soda": {
-    "bg": "#302b63",
-    "fg": "#d1c4e9",
-    "accent": "#b388ff",
-    "entry_bg": "#42378f",
-    "entry_fg": "#f3e5f5",
-    "button_bg": "#5e548e",
-    "button_fg": "#f3e5f5"
-  },
-  "Crimson": {
-    "bg": "#200303",
-    "fg": "#ff5757",
-    "accent": "#ed213a",
-    "entry_bg": "#590202",
-    "entry_fg": "#fff2f2",
-    "button_bg": "#7c1515",
-    "button_fg": "#fff2f2"
-  },
-  "Ocean": {
-    "bg": "#03234b",
-    "fg": "#74cfff",
-    "accent": "#18a5a5",
-    "entry_bg": "#01314d",
-    "entry_fg": "#a8e9ff",
-    "button_bg": "#0d426c",
-    "button_fg": "#d6f9ff"
-  },
-  "Midnight": {
-    "bg": "#121212",
+  "Shadow Realm": {
+    "bg": "#111111",
     "fg": "#e0e0e0",
-    "accent": "#3742fa",
-    "entry_bg": "#23272e",
+    "accent": "#444444",
+    "entry_bg": "#181818",
     "entry_fg": "#e0e0e0",
-    "button_bg": "#23272e",
+    "button_bg": "#222222",
     "button_fg": "#e0e0e0"
   },
-  "Sunset": {
-    "bg": "#ff6e7f",
-    "fg": "#fff5e1",
-    "accent": "#bfe9ff",
-    "entry_bg": "#ffb88c",
-    "entry_fg": "#653e3e",
-    "button_bg": "#f47c4c",
-    "button_fg": "#fff5e1"
-  },
-  "Mint": {
-    "bg": "#e9fffb",
-    "fg": "#257a6a",
-    "accent": "#1de9b6",
-    "entry_bg": "#b2fff6",
-    "entry_fg": "#257a6a",
-    "button_bg": "#5ae3c5",
-    "button_fg": "#257a6a"
-  },
-  "Tangerine": {
-    "bg": "#ffbe76",
-    "fg": "#48332b",
-    "accent": "#ff793f",
-    "entry_bg": "#ffeaa7",
-    "entry_fg": "#48332b",
-    "button_bg": "#ffad60",
-    "button_fg": "#6d3a0e"
-  },
-  "Cyberpunk": {
-    "bg": "#2a003f",
-    "fg": "#fff800",
-    "accent": "#fc00ff",
-    "entry_bg": "#1f002a",
-    "entry_fg": "#fff800",
-    "button_bg": "#b100c9",
-    "button_fg": "#fff800"
-  },
-  "Pastel": {
-    "bg": "#ffe9e3",
-    "fg": "#41436a",
-    "accent": "#ffd6e0",
-    "entry_bg": "#e7c6ff",
-    "entry_fg": "#41436a",
-    "button_bg": "#fad2e1",
-    "button_fg": "#41436a"
-  },
-  "Peach": {
-    "bg": "#ffe5b4",
-    "fg": "#8d5524",
-    "accent": "#ffb074",
-    "entry_bg": "#fff4d7",
-    "entry_fg": "#8d5524",
-    "button_bg": "#ffbf86",
-    "button_fg": "#8d5524"
-  },
-  "Terminal": {
-    "bg": "#181c1b",
-    "fg": "#00ff00",
-    "accent": "#00bb00",
-    "entry_bg": "#1a2421",
-    "entry_fg": "#00ff00",
-    "button_bg": "#333333",
-    "button_fg": "#00ff00"
-  },
-  "Aqua": {
-    "bg": "#e0f7fa",
-    "fg": "#004d40",
-    "accent": "#00bcd4",
-    "entry_bg": "#b2ebf2",
-    "entry_fg": "#004d40",
-    "button_bg": "#33c6ba",
-    "button_fg": "#004d40"
-  },
-  "Bubblegum": {
-    "bg": "#ffb6b9",
-    "fg": "#252839",
-    "accent": "#fae3d9",
-    "entry_bg": "#bbded6",
-    "entry_fg": "#252839",
-    "button_bg": "#ffe3e3",
-    "button_fg": "#252839"
-  },
-  "Royal": {
-    "bg": "#353535",
-    "fg": "#f8fafc",
-    "accent": "#5533ff",
-    "entry_bg": "#2b2a4c",
-    "entry_fg": "#f8fafc",
-    "button_bg": "#433b73",
-    "button_fg": "#f8fafc"
-  },
-  "Forest": {
-    "bg": "#22322f",
-    "fg": "#b6d7a8",
-    "accent": "#6ab04c",
-    "entry_bg": "#37615a",
-    "entry_fg": "#b6d7a8",
-    "button_bg": "#30544e",
-    "button_fg": "#b6d7a8"
-  },
-  "Classic": {
-    "bg": "#e0e0e0",
-    "fg": "#222",
-    "accent": "#1565c0",
-    "entry_bg": "#ffffff",
-    "entry_fg": "#222",
-    "button_bg": "#e3e6e8",
-    "button_fg": "#232323"
-  },
-  "Rainbow": {
-    "bg": "#f7e8ff",
-    "fg": "#5d26c1",
-    "accent": "#fbb03b",
-    "entry_bg": "#ffe2ed",
-    "entry_fg": "#f05272",
-    "button_bg": "#74e2fa",
-    "button_fg": "#d72660"
-  },
-  "Bubble Tea": {
-    "bg": "#e2c2b9",
-    "fg": "#674846",
-    "accent": "#8b5d33",
-    "entry_bg": "#f5e6e0",
-    "entry_fg": "#674846",
-    "button_bg": "#e8d5ba",
-    "button_fg": "#8b5d33"
-  },
-  "Midori": {
-    "bg": "#d1ffd7",
-    "fg": "#135c21",
-    "accent": "#59ce8f",
-    "entry_bg": "#a3ffa6",
-    "entry_fg": "#135c21",
-    "button_bg": "#48bb78",
+  "Visual Studio": {
+    "bg": "#1e1e1e",
+    "fg": "#d4d4d4",
+    "accent": "#007acc",
+    "entry_bg": "#252526",
+    "entry_fg": "#d4d4d4",
+    "button_bg": "#007acc",
     "button_fg": "#ffffff"
   },
-  "Coral Reef": {
-    "bg": "#fff5e1",
-    "fg": "#e17055",
-    "accent": "#ff7675",
-    "entry_bg": "#ffe8d6",
-    "entry_fg": "#d63031",
-    "button_bg": "#fdab9f",
-    "button_fg": "#ffffff"
-  },
-  "Skyline": {
-    "bg": "#6dd5fa",
-    "fg": "#05445e",
-    "accent": "#65e6e0",
-    "entry_bg": "#b2ebf2",
-    "entry_fg": "#05445e",
-    "button_bg": "#3cc0f8",
-    "button_fg": "#05445e"
-  },
-  "Halloween": {
-    "bg": "#2d1e2f",
-    "fg": "#ff8000",
-    "accent": "#bf1363",
-    "entry_bg": "#372549",
-    "entry_fg": "#ff8000",
-    "button_bg": "#ff8000",
-    "button_fg": "#372549"
-  },
-  "Cotton Candy": {
-    "bg": "#fad0c4",
-    "fg": "#7f53ac",
-    "accent": "#fcb69f",
-    "entry_bg": "#fff1eb",
-    "entry_fg": "#7f53ac",
-    "button_bg": "#fcb69f",
-    "button_fg": "#7f53ac"
-  },
-  "Hacker": {
-    "bg": "#0a0f0a",
-    "fg": "#00ff00",
-    "accent": "#29ff6a",
-    "entry_bg": "#192819",
-    "entry_fg": "#00ff00",
-    "button_bg": "#212f22",
-    "button_fg": "#00ff00"
-  },
-  "Pumpkin Spice": {
-    "bg": "#e26026",
-    "fg": "#faf3dd",
-    "accent": "#b34100",
-    "entry_bg": "#f5e1da",
-    "entry_fg": "#e26026",
-    "button_bg": "#ffb970",
-    "button_fg": "#b34100"
-  },
-  "Lavender Dream": {
-    "bg": "#b993d6",
-    "fg": "#30115a",
-    "accent": "#ae72ba",
-    "entry_bg": "#e8d0fb",
-    "entry_fg": "#30115a",
-    "button_bg": "#ae72ba",
-    "button_fg": "#f9f6ff"
-  },
-  "Space": {
-    "bg": "#0d1b2a",
-    "fg": "#e0e1dd",
-    "accent": "#415a77",
-    "entry_bg": "#1b263b",
-    "entry_fg": "#e0e1dd",
-    "button_bg": "#415a77",
-    "button_fg": "#e0e1dd"
-  },
-  "Citrus": {
-    "bg": "#ffe259",
-    "fg": "#374331",
-    "accent": "#ffa751",
-    "entry_bg": "#fffcd5",
-    "entry_fg": "#374331",
-    "button_bg": "#ffa751",
-    "button_fg": "#fffcd5"
-  },
-  "Cherry Blossom": {
-    "bg": "#ffe6f7",
-    "fg": "#8a1253",
-    "accent": "#e75480",
-    "entry_bg": "#ffe2ed",
-    "entry_fg": "#8a1253",
-    "button_bg": "#e75480",
-    "button_fg": "#ffe6f7"
-  },
-  "Slate": {
-    "bg": "#212b36",
+  "Light Mode": {
+    "bg": "#ffffff",
     "fg": "#ffffff",
-    "accent": "#00b8d9",
-    "entry_bg": "#2e3a47",
+    "accent": "#ffffff",
+    "entry_bg": "#ffffff",
     "entry_fg": "#ffffff",
-    "button_bg": "#394756",
+    "button_bg": "#ffffff",
     "button_fg": "#ffffff"
   },
-  "Gold Rush": {
-    "bg": "#1a1919",
-    "fg": "#ffd700",
-    "accent": "#ffce36",
-    "entry_bg": "#2e261c",
-    "entry_fg": "#ffd700",
-    "button_bg": "#ffd700",
-    "button_fg": "#1a1919"
+  "Not Spotify": {
+    "bg": "#1e1e1e",
+    "fg": "#1ed760",
+    "accent": "#1ed760",
+    "entry_bg": "#252526",
+    "entry_fg": "#1ed760",
+    "button_bg": "#1ed760",
+    "button_fg": "#1e1e1e"
   }
-}
+} 
